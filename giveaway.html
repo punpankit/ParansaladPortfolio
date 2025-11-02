@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Giveaway — Paransalad Portfolio</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(to bottom, #89bdf6 0%, #f5b3cc 100%);
+      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+    }
+    .page {
+      width: 100%;
+      max-width: 720px;
+      padding: 72px 16px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+    .back-btn {
+      position: fixed;
+      top: 16px; left: 16px;
+      background: rgba(255,255,255,.75);
+      border: 0; border-radius: 12px;
+      padding: .55rem .9rem; cursor: pointer;
+      font-size: 0.9rem;
+      box-shadow: 0 6px 14px rgba(0,0,0,.12);
+    }
+    .tweet-slot {
+      min-height: 180px;             /* prevents layout jump */
+      display: grid; place-items: center;
+      background: rgba(255,255,255,.35);
+      border-radius: 12px;
+      box-shadow: 0 10px 24px rgba(0,0,0,.12);
+      padding: 8px;
+    }
+    .fallback {
+      font-size: .9rem; color:#1d2b42; opacity:.7; text-align:center;
+    }
+  </style>
+</head>
+<body>
+  <button class="back-btn" onclick="location.href='index.html'">← Back</button>
+
+  <div class="page">
+    <!-- Replace the data-url values with your post URLs -->
+    <div class="tweet-slot" data-url="https://x.com/paransalad/status/1863761768335790134">
+      <div class="fallback">Loading tweet…</div>
+    </div>
+
+    <div class="tweet-slot" data-url="https://x.com/paransalad/status/1890046373757956435">
+      <div class="fallback">Loading tweet…</div>
+    </div>
+  </div>
+
+  <!-- Load the widgets script once -->
+  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  <script>
+    // Helper: get the numeric tweet ID from a twitter/x URL
+    function getTweetId(url) {
+      try {
+        const u = new URL(url);
+        const parts = u.pathname.split("/");            // /{user}/status/{id}
+        const id = parts.find(p => /^\d+$/.test(p));
+        return id || null;
+      } catch { return null; }
+    }
+
+    // Wait for the Twitter widgets object, then render each slot
+    (function waitForWidgets(){
+      if (window.twttr && twttr.widgets && twttr.widgets.createTweet) {
+        document.querySelectorAll(".tweet-slot").forEach(async slot => {
+          const url = slot.getAttribute("data-url")
+            .replace("https://x.com", "https://twitter.com"); // normalize
+          const id = getTweetId(url);
+          if (!id) {
+            slot.innerHTML = '<div class="fallback">Invalid tweet URL.</div>';
+            return;
+          }
+          // Render the tweet
+          await twttr.widgets.createTweet(id, slot, {
+            align: "center",
+            theme: "light",          // or "dark"
+            conversation: "none"     // hide replies if you want
+          }).catch(() => {
+            slot.innerHTML = '<div class="fallback">Couldn’t load tweet. Check ad-block or network.</div>';
+          });
+        });
+      } else {
+        setTimeout(waitForWidgets, 60); // try again until script is ready
+      }
+    })();
+  </script>
+</body>
+</html>
