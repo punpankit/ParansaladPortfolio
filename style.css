@@ -1,96 +1,101 @@
-/* Buttons under keyring */
-.button-wrap {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  flex-wrap: wrap; /* keeps layout nice on small screens */
+html, body {
+  margin: 0;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
 }
 
-.nav-btn {
-  width: clamp(120px, 14vw, 160px); /* responsive scaling */
-  height: auto;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
-  border-radius: 12px;
-  cursor: pointer;
-  animation: floatBtn 5s ease-in-out infinite;
+/* gradient base layer */
+body {
+  background: linear-gradient(180deg, #a2c8ff 0%, #cbb4e8 50%, #f9b5c7 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
 }
 
-.nav-btn:hover {
-  transform: translateY(-6px) scale(1.05);
-  filter: drop-shadow(0 0 10px rgba(255,150,200,0.7))
-          drop-shadow(0 0 20px rgba(120,180,255,0.5));
-}
-
-@keyframes floatBtn {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-.back-btn {
+/* clouds animation layers */
+.sky, .cloud-back, .cloud-front {
   position: fixed;
-  top: 20px;
-  left: 20px;
-  padding: 6px 14px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: none;
-  border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  color: #2c2c2c;
-  cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-  z-index: 999;
+  inset: 0;
+  pointer-events: none;
 }
 
-.back-btn:hover {
-  background-color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  transform: translateY(-1px);
-}
-.button-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 1rem;
-  gap: 1.5rem;
+.cloud-back {
+  background-image: url("./assets/cloud1.png");
+  background-size: cover;
+  background-repeat: repeat-x;
+  opacity: 0.4;
+  animation: moveBack 120s linear infinite;
 }
 
-.program-wrap {
+.cloud-front {
+  background-image: url("./assets/cloud2.png");
+  background-size: cover;
+  background-repeat: repeat-x;
+  opacity: 0.7;
+  animation: moveFront 60s linear infinite;
+}
+
+@keyframes moveBack {
+  from { background-position: 0 0; }
+  to { background-position: -2000px 0; }
+}
+@keyframes moveFront {
+  from { background-position: 0 0; }
+  to { background-position: 2000px 0; }
+}
+
+/* content layout */
+.content {
+  position: relative;
+  z-index: 5;
   text-align: center;
-  margin-top: 1rem;
-  color: #3a3a3a;
-  font-family: 'Poppins', sans-serif;
+  padding-top: 5%;
 }
 
-.program-wrap h3 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  background: linear-gradient(90deg, #7fb8ff, #ffb6d9);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+h1 {
+  font-family: "Pacifico", cursive;
+  font-size: 3rem;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  margin-bottom: 30px;
 }
 
-.program-icons {
+.keyring {
+  width: 220px;
+  max-width: 40%;
+  margin-bottom: 40px;
+}
+
+/* buttons */
+.buttons {
   display: flex;
   justify-content: center;
-  align-items: center;
+  gap: 20px;
   flex-wrap: wrap;
-  gap: 1.2rem;
 }
 
-.program-icons img {
-  width: clamp(40px, 8vw, 60px);
-  height: auto;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
-  transition: transform 0.3s ease, filter 0.3s ease;
+.btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 15px 25px;
+  border-radius: 15px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
 }
 
-.program-icons img:hover {
-  transform: translateY(-5px);
-  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
+.btn:hover {
+  background-color: rgba(255,255,255,0.35);
+  transform: translateY(-4px);
 }
 
+/* programs section */
+.programs {
+  margin-top: 40px;
+  color: white;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
