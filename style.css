@@ -1,5 +1,77 @@
+/* ---------- Background Layers ---------- */
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow-x: hidden;
+  font-family: 'Poppins', sans-serif;
+}
 
-/* Buttons under keyring */
+/* Main gradient background */
+body {
+  background: linear-gradient(180deg, #a2c8ff 0%, #cbb4e8 50%, #f9b5c7 100%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Cloud layers */
+.sky, .cloud-back, .cloud-front {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-color: transparent;
+  z-index: 1;
+}
+
+.cloud-back {
+  background-image: url("./assets/cloud1.png");
+  background-size: cover;
+  background-repeat: repeat-x;
+  opacity: 0.4;
+  animation: moveBack 120s linear infinite;
+}
+
+.cloud-front {
+  background-image: url("./assets/cloud2.png");
+  background-size: cover;
+  background-repeat: repeat-x;
+  opacity: 0.7;
+  animation: moveFront 60s linear infinite;
+}
+
+@keyframes moveBack {
+  from { background-position: 0 0; }
+  to { background-position: -2000px 0; }
+}
+@keyframes moveFront {
+  from { background-position: 0 0; }
+  to { background-position: 2000px 0; }
+}
+
+/* ---------- Main Content ---------- */
+.content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding-top: 5%;
+}
+
+h1 {
+  font-family: "Pacifico", cursive;
+  font-size: 3rem;
+  color: white;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+}
+
+.keyring {
+  width: 220px;
+  max-width: 40%;
+  margin-bottom: 40px;
+}
+
+/* ---------- Buttons Under Keyring ---------- */
 .button-wrap {
   display: flex;
   justify-content: center;
@@ -29,6 +101,8 @@
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-4px); }
 }
+
+/* Back Button */
 .back-btn {
   position: fixed;
   top: 20px;
@@ -51,6 +125,8 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transform: translateY(-1px);
 }
+
+/* ---------- Programs Used Section ---------- */
 .button-section {
   display: flex;
   flex-direction: column;
@@ -66,55 +142,13 @@
   font-family: 'Poppins', sans-serif;
 }
 
-/* ---- page base ---- */
-html, body { height: 100%; margin: 0; }
-body {
-  /* THE gradient – always visible */
-  background: linear-gradient(180deg,#a2c8ff 0%,#cbb4e8 50%,#f9b5c7 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  position: relative;
-  overflow-x: hidden;
-}
-
-/* Make sure no other image covers the gradient */
-body::before {
-  content: none !important;
-}
-
-/* ---- animated cloud layers (transparent PNGs) ---- */
-.sky, .cloud-back, .cloud-front {
-  position: fixed; inset: 0; pointer-events: none;
-  /* IMPORTANT: no solid background color here */
-  background-color: transparent;
-  z-index: 1;
-}
-
-/* remove any previous background image that might be dark */
-.sky { background-image: none !important; }
-
-/* use your transparent cloud pngs from ./assets/ */
-.cloud-back {
-  background-image: url("./assets/cloud1.png");
-  background-size: cover; background-repeat: repeat-x;
-  opacity: .45; animation: moveBack 120s linear infinite;
-}
-
-.cloud-front {
-  background-image: url("./assets/cloud2.png");
-  background-size: cover; background-repeat: repeat-x;
-  opacity: .75; animation: moveFront 60s linear infinite;
-}
-
-@keyframes moveBack  { from {background-position:0 0} to {background-position:-2000px 0} }
-@keyframes moveFront { from {background-position:0 0} to {background-position: 2000px 0} }
-
-/* content sits above clouds */
-.content { position: relative; z-index: 5; text-align:center; padding-top: 5%; }
-
-/* your other styles ... */
-
+.program-wrap h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #7fb8ff, #ffb6d9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .program-icons {
