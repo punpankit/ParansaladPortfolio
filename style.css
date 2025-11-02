@@ -1,0 +1,96 @@
+
+/* Buttons under keyring */
+.button-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap; /* keeps layout nice on small screens */
+}
+
+.nav-btn {
+  width: clamp(120px, 14vw, 160px); /* responsive scaling */
+  height: auto;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.25));
+  border-radius: 12px;
+  cursor: pointer;
+  animation: floatBtn 5s ease-in-out infinite;
+}
+
+.nav-btn:hover {
+  transform: translateY(-6px) scale(1.05);
+  filter: drop-shadow(0 0 10px rgba(255,150,200,0.7))
+          drop-shadow(0 0 20px rgba(120,180,255,0.5));
+}
+
+@keyframes floatBtn {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  padding: 6px 14px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #2c2c2c;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  z-index: 999;
+}
+
+.back-btn:hover {
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+}
+.button-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1.5rem;
+}
+
+.program-wrap {
+  text-align: center;
+  margin-top: 1rem;
+  color: #3a3a3a;
+  font-family: 'Poppins', sans-serif;
+}
+
+.program-wrap h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #7fb8ff, #ffb6d9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.program-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.program-icons img {
+  width: clamp(40px, 8vw, 60px);
+  height: auto;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.program-icons img:hover {
+  transform: translateY(-5px);
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
+}
